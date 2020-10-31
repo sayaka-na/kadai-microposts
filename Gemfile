@@ -61,3 +61,7 @@ gem 'kaminari'
   #gem 'pry-byebug'
   #gem 'pry-doc'
 #end
+
+group :production do
+  gem 'pg', '>= 0.18', '< 2.0'
+end
