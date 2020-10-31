@@ -13,19 +13,12 @@
           <% if current_user == micropost.user %>
             <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
           <% else %>
-          <% unless current_user == @micropost %>
-            <% if current_user.like?(@micropost) %>
-              <%= form_with(model: current_user.favorites.find_by(micropost_id: user.id), local: true, method: :delete) do |f| %>
-                <%= hidden_field_tag :micropost_id, current_user.id %>
-                <%= f.submit 'お気に入り外す', class: 'btn btn-danger btn-block' %>
-              <% end %>
+            <% if current_user.like?(micropost) %>
+              <%= link_to "お気に入り解除", micropost_favorites_path(micropost), method: :delete %>
             <% else %>
-              <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
-                <%= hidden_field_tag :micropost_id, current_user.id %>
-                <%= f.submit 'お気に入りに追加', class: 'btn btn-primary btn-block' %>
-              <% end %>
+              <%= link_to "お気に入り追加", micropost_favorites_path(micropost), method: :post %>
             <% end %>
-          <% end %>
+          
          <% end %>
         </div>
       </div>

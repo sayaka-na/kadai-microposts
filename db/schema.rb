@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2020_10_26_102318) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["micropost_id"], name: "index_favorites_on_micropost_id"
-    t.index ["user_id", "micropost_id"], name: "index_favorites_on_user_id_and_micropost_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
@@ -48,8 +47,8 @@ ActiveRecord::Schema.define(version: 2020_10_26_102318) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "favorites", "microposts"
   add_foreign_key "favorites", "users"
-  add_foreign_key "favorites", "users", column: "micropost_id"
   add_foreign_key "microposts", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
